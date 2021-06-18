@@ -154,6 +154,7 @@ ruleTester.run('no-extraneous-dependencies', rule, {
     test({
       code: 'import "rxjs/operators"',
     }),
+
   ],
   invalid: [
     test({
@@ -356,6 +357,12 @@ ruleTester.run('no-extraneous-dependencies', rule, {
       options: [{ packageDir: packageDirMonoRepoRoot }],
       errors: [{
         message: `'not-a-dependency' should be listed in the project's dependencies. Run 'npm i -S not-a-dependency' to add it`,
+      }],
+    }),
+    test({
+      code: 'import "esm-package/esm-module";',
+      errors: [{
+        message: `'esm-package' should be listed in the project's dependencies. Run 'npm i -S esm-package' to add it`,
       }],
     }),
   ],
