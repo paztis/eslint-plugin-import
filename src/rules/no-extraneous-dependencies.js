@@ -184,7 +184,14 @@ function reportIfMissing(context, deps, depsOptions, node, name) {
   // test the real name from the resolved package.json
   // if not aliased imports (alias/react for example), importPackageName can be  misinterpreted
   const realPackageName = getModuleRealName(resolved);
+
+  if(!realPackageName){
+    throw new Error(`cant find real package name for import ${name}`);
+  }
+
   const realPackageNameDeclaration = checkDependencyDeclaration(deps, realPackageName);
+
+
 
   if (realPackageNameDeclaration.isInDeps ||
     (depsOptions.allowDevDeps && realPackageNameDeclaration.isInDevDeps) ||
